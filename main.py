@@ -2,13 +2,13 @@ import json
 import time
 import datetime
 import random
-from kafka import KafkaProducer
 import os
+from kafka import KafkaProducer
 
 def main():
-    bootstrap_servers = os.environ.get("BOOTSTRAP_SERVER") #'localhost:9092'
-    topic = os.environ.get("TOPIC") #'pyTest'
-    message = os.environ.get("MESSAGE") #"Hello from python producer!"
+    bootstrap_servers = os.environ.get("BOOTSTRAP_SERVER")
+    topic = os.environ.get("TOPIC")
+    message = os.environ.get("MESSAGE")
 
     producer = KafkaProducer(bootstrap_servers=bootstrap_servers,
                             value_serializer=lambda x: json.dumps(x).encode('utf-8'))
@@ -23,15 +23,20 @@ def main():
                 "metricValue": random.randint(1, 100),
                 "message": message
             }
-            producer.send(topic, value=event)
-            print("Message sent successfully to topic:", topic)
+            future = producer.send(topic, value=event)
+            try:
+                record_metadata = future.get(timeout=10)  # Timeout is optional, adjust as needed
+                print('Message sent successfully to topic {}, partition {}, offset {}'.format(
+                    record_metadata.topic, record_metadata.partition, record_metadata.offset
+                ))
+            except Exception as e:
+                print('Failed to send message: {}'.format(e))
+
 
             reporter_id += 1
             time.sleep(1)
-
-    except KeyboardInterrupt:
+    except Exception:
         producer.close()
 
 if __name__ == "__main__":
     main()
-
