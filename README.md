@@ -22,11 +22,11 @@ This Python Kafka producer generates random events and sends them to a Kafka top
 
 2. Build the docker image using the dokcer file
 
-    ```dokcer build -t python-consumer .```
+    ```dokcer build -t python-producer .```
 
 3. Run the image with the following environment variables
 
-    ```docker run -e BOOTSTRAP_SERVER=<kafka server> -e TOPIC=<kafka topic> -e MESSAGE=<message string> python-consumer```
+    ```docker run -e BOOTSTRAP_SERVER=<kafka server> -e TOPIC=<kafka topic> -e MESSAGE=<message string> python-producer```
 
     BOOTSTRAP_SERVER: This environment variable specifies the bootstrap servers for your Kafka cluster. These are used by the Kafka consumer to initially establish connections with the Kafka brokers in the cluster
 
