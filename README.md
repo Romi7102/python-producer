@@ -18,7 +18,7 @@ This Python Kafka producer generates random events and sends them to a Kafka top
 
 ## Usage
 
-1. Ensure that you have a running Kafka cluster and a MongoDB instance.
+1. Ensure that you have a running Kafka cluster.
 
 2. Build the docker image using the dokcer file
 
@@ -28,6 +28,8 @@ This Python Kafka producer generates random events and sends them to a Kafka top
 
     ```docker run -e BOOTSTRAP_SERVER=<kafka server> -e TOPIC=<kafka topic> -e MESSAGE=<message string> python-producer```
 
+    ### Environment Variables
+    
     BOOTSTRAP_SERVER: This environment variable specifies the bootstrap servers for your Kafka cluster. These are used by the Kafka consumer to initially establish connections with the Kafka brokers in the cluster
 
     KAFKA_TOPIC: This environment variable specifies the Kafka topic that the Kafka consumer will subscribe to. The consumer will receive messages from this topic and process them accordingly.
