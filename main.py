@@ -27,17 +27,14 @@ def main():
             future = producer.send(topic, value=event)
             try:
                 record_metadata = future.get(timeout=10)  # Timeout is optional, adjust as needed
-                print('Message sent successfully to topic {}, partition {}, offset {}'.format(
-                    record_metadata.topic, record_metadata.partition, record_metadata.offset
-                ))
-            except Exception as e:
-                print('Failed to send message: {}'.format(e))
+                print(f"Message sent successfully to topic {record_metadata.topic}, partition {record_metadata.partition}, offset {record_metadata.offset}")
 
+            except Exception as e:
+                print(f"Failed to send message: {e}")
 
             reporter_id += 1
             time.sleep(int(sleep))
     except Exception:
         producer.close()
-
 if __name__ == "__main__":
     main()
