@@ -9,6 +9,7 @@ def main():
     bootstrap_servers = os.environ.get("BOOTSTRAP_SERVER")
     topic = os.environ.get("TOPIC")
     message = os.environ.get("MESSAGE")
+    sleep = os.environ.get("SLEEP")
 
     producer = KafkaProducer(bootstrap_servers=bootstrap_servers,
                             value_serializer=lambda x: json.dumps(x).encode('utf-8'))
@@ -34,7 +35,7 @@ def main():
 
 
             reporter_id += 1
-            time.sleep(1)
+            time.sleep(int(sleep))
     except Exception:
         producer.close()
 

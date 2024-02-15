@@ -26,7 +26,7 @@ This Python Kafka producer generates random events and sends them to a Kafka top
 
 3. Run the image with the following environment variables
 
-    ```docker run -e BOOTSTRAP_SERVER=<kafka server> -e TOPIC=<kafka topic> -e MESSAGE=<message string> python-producer```
+    ```docker run -e BOOTSTRAP_SERVER=<kafka server> -e TOPIC=<kafka topic> -e MESSAGE=<message string> -e SLEEP=<sleep time> python-producer```
 
     ### Environment Variables
     
@@ -35,6 +35,8 @@ This Python Kafka producer generates random events and sends them to a Kafka top
     KAFKA_TOPIC: This environment variable specifies the Kafka topic that the Kafka consumer will subscribe to. The consumer will receive messages from this topic and process them accordingly.
 
     MESSAGE: This environment variable specifies the message to be sent to the Kafka broker inside the event object.
+
+    SLEEP: This environment variable specifies the number of seconds to sleep between each insertion.
 
     The event object is randomly generated:
     ``` 
