@@ -26,5 +26,6 @@ def main():
             time.sleep(int(SLEEP))
     except Exception:
         producer.close()
+        
 if __name__ == "__main__":
     main()
