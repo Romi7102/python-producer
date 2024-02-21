@@ -15,8 +15,8 @@ def main():
             event = {
                 "reporterId": reporter_id,
                 "timestamp": datetime.datetime.now().strftime(DATETIME_FORMAT),
-                "metricId": random.randint(int(EVENT["METRIC_ID_MIN"]), int(EVENT["METRIC_ID_MAX"])),
-                "metricValue": random.randint(int(EVENT["METRIC_VALUE_MIN"]), int(EVENT["METRIC_VALUE_MAX"])),
+                "metricId": random.randint(EVENT["METRIC_ID_MIN"], EVENT["METRIC_ID_MAX"]),
+                "metricValue": random.randint(EVENT["METRIC_VALUE_MIN"], EVENT["METRIC_VALUE_MAX"]),
                 "message": MESSAGE
             }
             future = producer.send(TOPIC, value=event)
