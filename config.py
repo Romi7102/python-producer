@@ -5,7 +5,6 @@ with open("config.yaml") as f:
 
 BOOTSTRAP_SERVER = config["BOOTSTRAP_SERVER"]
 TOPIC = config["TOPIC"]
-MESSAGE = config["MESSAGE"]
 SLEEP = config["SLEEP"]
 DATETIME_FORMAT = config["DATETIME_FORMAT"]
 JSON_FORMAT = config["JSON_FORMAT"]

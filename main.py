@@ -3,22 +3,17 @@ import time
 import datetime
 import random
 from kafka import KafkaProducer
-from config import BOOTSTRAP_SERVER , TOPIC , MESSAGE , SLEEP , DATETIME_FORMAT , JSON_FORMAT , EVENT
+from config import BOOTSTRAP_SERVER , TOPIC  , SLEEP , JSON_FORMAT , EVENT
+from utils import get_event
 
 def main():
     producer = KafkaProducer(bootstrap_servers=BOOTSTRAP_SERVER,
                             value_serializer=lambda x: json.dumps(x).encode(JSON_FORMAT))
 
     try:
-        reporter_id = int(EVENT["REPORTER_ID_START"])
+        reporter_id = EVENT["REPORTER_ID_START"]
         while True:
-            event = {
-                "reporterId": reporter_id,
-                "timestamp": datetime.datetime.now().strftime(DATETIME_FORMAT),
-                "metricId": random.randint(EVENT["METRIC_ID_MIN"], EVENT["METRIC_ID_MAX"]),
-                "metricValue": random.randint(EVENT["METRIC_VALUE_MIN"], EVENT["METRIC_VALUE_MAX"]),
-                "message": MESSAGE
-            }
+            event = get_event(reporter_id)
             future = producer.send(TOPIC, value=event)
             try:
                 record_metadata = future.get(timeout=10) 
@@ -27,7 +22,7 @@ def main():
             except Exception as e:
                 print(f"Failed to send message: {e}")
 
-            reporter_id += int(EVENT["REPORTER_ID_INCREMENT"])
+            reporter_id += EVENT["REPORTER_ID_INCREMENT"]
             time.sleep(int(SLEEP))
     except Exception:
         producer.close()

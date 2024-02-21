@@ -6,6 +6,7 @@ COPY requirements.txt ./
 COPY main.py ./
 COPY config.yaml ./
 COPY config.py ./
+COPY utils.py ./
 
 RUN pip install -r requirements.txt
 
