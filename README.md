@@ -42,12 +42,16 @@ This Python Kafka producer generates random events and sends them to a Kafka top
 
     REPORTER_ID_INCREMENT: Specifies the reporter id increments for every new event generated.
 
+    ENCODING: Specifies the json encoding of the data to be generated.
 
-3. Build the docker image using the dokcer file
+    DATETIME_FORMAT: Specifies the date format of the data to be generated.
+
+
+4. Build the docker image using the dokcer file
 
     ```dokcer build -t python-producer .```
 
-4. Run the image with the following command:
+5. Run the image with the following command:
 
    `docker run python-producer`  
 
