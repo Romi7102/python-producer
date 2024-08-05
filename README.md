@@ -42,7 +42,7 @@ This Python Kafka producer generates random events and sends them to a Kafka top
 
     REPORTER_ID_INCREMENT: Specifies the reporter id increments for every new event generated.
 
-    ENCODING: Specifies the json encoding of the data to be generated.
+    JSON_FORMAT: Specifies the json encoding of the data to be generated.
 
     DATETIME_FORMAT: Specifies the date format of the data to be generated.
 
